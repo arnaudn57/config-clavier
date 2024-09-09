@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clavier Virtuel Moderne</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <div class="container mx-auto py-10">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">Config clavier</h1>
+
+    <div class="controls flex justify-center space-x-4 mb-6">
+      <div>
+        <label for="configSelect" class="block text-sm font-medium text-gray-700">Choisir une configuration:</label>
+        <select id="configSelect" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+          <option value="">-- Sélectionnez --</option>
+          <option value="leo">Clavier Leo (5 lignes, 7 touches par ligne)</option>
+          <option value="kwisatz">Kwisatz (4 lignes, 5 touches par ligne)</option>
+        </select>
+      </div>
+
+      <button id="addRowBtn" class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        Ajouter une ligne
+      </button>
+
+      <button id="exportBtn" class="px-6 py-2 bg-green-500 text-white font-semibold rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+        Exporter en JSON
+      </button>
+    </div>
+
+    <div id="container" class="bg-white shadow rounded-lg p-6 max-w-4xl mx-auto"></div>
+
+    <textarea id="jsonOutput" rows="10" cols="50" class="mt-6 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" readonly></textarea>
+
+  </div>
+
+  <div id="configModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full p-6">
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Configurer la touche</h3>
+          <button class="text-gray-400 hover:text-gray-600" id="closeModal">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <label for="type" class="block text-sm font-medium text-gray-700">Type de touche:</label>
+          <select id="type" class="mt-1 block w-full pl-3 pr-10 py-2 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+            <option value="product">Produit</option>
+            <option value="function">Fonction</option>
+          </select>
+        </div>
+
+        <div class="mt-4">
+          <label for="productFunction" class="block text-sm font-medium text-gray-700">Produit/Fonction:</label>
+          <input type="text" id="productFunction" class="mt-1 block w-full pl-3 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Nom du produit ou fonction">
+        </div>
+
+        <div class="mt-4">
+          <label for="color" class="block text-sm font-medium text-gray-700">Couleur:</label>
+          <input type="color" id="color" class="mt-1 block w-full h-10 border border-gray-300 rounded-md">
+        </div>
+
+        <div class="mt-6 flex justify-end space-x-2">
+          <button id="saveConfigBtn" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            Sauvegarder
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/konva/8.3.9/konva.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
